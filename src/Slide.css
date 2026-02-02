@@ -1,0 +1,87 @@
+/* src/Slide.css */
+
+/* Style général des slides */
+.slide {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 30px;
+   
+    opacity: 0;
+    transform: translateY(50px);
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    
+  }
+  
+  /* Quand la slide est active, elle devient visible et se déplace */
+  .slide.active {
+    opacity: 1;
+    transform: translateY(0);
+    overflow:visible;
+  }
+  .disabel {
+    padding: 0px;
+    border-radius: 0px;
+    margin: 0px;
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+  }
+  
+  /* Animation d'apparition pour la première slide */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes title {
+    0% {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+  }
+  @keyframes parag {
+    0% {
+      opacity: 0;
+      transform: translateX(100px);
+      font-size: 0px;
+    }
+    50% {
+        opacity: 0;
+        transform: translateX(100px);
+        font-size: 0px;
+      }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+      font-size: 18px;
+    }
+    
+  }
+  
+  /* Ajouter des animations spécifiques pour les titres */
+  .active h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    color: #333;
+    animation: title 1s ease-out;
+  }
+  
+  /* Ajouter des animations pour les paragraphes */
+ 
+  .active p,.active img,.active ul {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    color: #555;
+    animation: parag 1s ease-out ;
+  }
+  
