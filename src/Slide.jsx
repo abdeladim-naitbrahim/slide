@@ -8,7 +8,7 @@ function ListComponent({ items }) {
   return (
     <ul>
       {items.map((item, index) => (
-        <li key={index}>{item}</li>
+        <li style={{ '--fade-time': index*0.5+0.5+'s' }} key={index}>{item}</li>
       ))}
     </ul>
   );
@@ -47,14 +47,16 @@ function Slide({ title, content, reveal,className }) {
     <div className={`slide ${className}`}>
         
       <h2 >{title}</h2>
-
       {contents.slice(0, visibleCount).map((content, index) => (
         <div key={index} className="content-item">
+          
+          {React.isValidElement(content) && content}
           {content.type === 'text' && <p>{content.text}</p>}
           {content.type === 'list' && <ListComponent items={content.items} />}
           {content.type === 'image' && (
             <ImageComponent src={content.src} alt={content.alt} />
           )}
+          
           
         </div>
       ))}

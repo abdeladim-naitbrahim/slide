@@ -2,54 +2,86 @@
 import React, { useState } from 'react';
 import Slide from './Slide';
 import './App.css';
+import Graph from './components/Graph';
 
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
-    {
-      title: "Introduction à la fonction affine",
-      content: {
-        type: 'text',
-        text: "La fonction affine s'écrit sous la forme y = ax + b."
+  {
+    title: "Fonction affine : introduction",
+    reveal: "step",
+    content: [
+      {
+        type: "text",
+        text: "Définition : une fonction affine est de la forme y = ax + b."
       },
-    },
-    {
-      title: "Propriétés de la fonction affine",
-      content: {
-        type: 'list',
-        items: [
-          "La pente 'a' détermine l'inclinaison de la droite.",
-          "L'ordonnée à l'origine 'b' détermine où la droite coupe l'axe des ordonnées."
-        ]
+      {
+        type: "text",
+        text: "Exemple : y = 2x + 3 est une fonction affine."
       },
-    },
-    {
-      title: "Exemple concret",
-      content: {
-        type: 'text',
-        text: "Prenons l'exemple de la fonction y = 2x + 3."
+      {
+        type: "text",
+        text: "Calcul : pour x = 1, on a y = 2×1 + 3 = 5."
+      }
+    ]
+  },
+
+  {
+    title: "Présentation graphique",
+    reveal: "step",
+    content: [
+      <Graph/>,
+      {
+        type: "text",
+        text: "Remarque : la représentation graphique d’une fonction affine est une droite."
+      }
+    ]
+  },
+
+  {
+    title: "Rôle de a et de b",
+    reveal: "step",
+    content: [
+      {
+        type: "text",
+        text: "Le nombre a s’appelle la pente (ou coefficient directeur)."
       },
-    },
-    {
-      title: "Graphique de la fonction",
-      content: {
-        type: 'image',
-        src: 'https://example.com/graphique.jpg',
-        alt: 'Graphique de la fonction affine'
+      {
+        type: "text",
+        text: "Le nombre b s’appelle l’ordonnée à l’origine."
       },
-    },
-    {
-      title: "Propriétés",
-      reveal: "step",
-      content: [
-        { type: "text", text: "a est la pente" },
-        { type: "text", text: "b est l’ordonnée à l’origine" },
-        { type: "image", src: "/graph.png", alt: "graph" }
-      ]
-    }
-    
-  ];
+      {
+        type: "text",
+        text: "Quand a change, la droite tourne autour de l’axe des ordonnées."
+      },
+      {
+        type: "text",
+        text: "Quand b change, la droite se déplace verticalement et coupe l’axe en (0, b)."
+      },<Graph/>
+    ]
+  },
+
+  {
+    title: "Déterminer a et b",
+    reveal: "step",
+    content: [
+      {
+        type: "text",
+        text: "Graphiquement : on lit b au point d’intersection avec l’axe des ordonnées."
+      },
+      {
+        type: "text",
+        text: "Graphiquement : a se calcule comme le rapport Δy / Δx entre deux points."
+      },
+      {
+        type: "text",
+        text: "Numériquement : à partir de deux points, on calcule a puis b."
+      }
+    ]
+  }
+];
+
 
   const goToNextSlide = () => {
     //if (Slide.showNext && Slide.showNext()) return;

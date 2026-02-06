@@ -41,11 +41,24 @@
   @keyframes title {
     0% {
       opacity: 0;
-      transform: translateX(-100px);
+      transform: translateX(-100px)  scale(10);
     }
     100% {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateX(0)  scale(1);
+    }
+    
+  }
+  @keyframes list {
+    0% {
+      opacity: 0;
+      transform: translateX(-2000px) scale(0);
+      
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      
     }
     
   }
@@ -55,11 +68,7 @@
       transform: translateX(100px);
       font-size: 0px;
     }
-    50% {
-        opacity: 0;
-        transform: translateX(100px);
-        font-size: 0px;
-      }
+    
     100% {
       opacity: 1;
       transform: translateX(0);
@@ -73,15 +82,20 @@
     font-family: 'Arial', sans-serif;
     font-size: 24px;
     color: #333;
-    animation: title 1s ease-out;
+    animation: title 1s ease-out ;
   }
   
   /* Ajouter des animations pour les paragraphes */
  
-  .active p,.active img,.active ul {
+  .active p,.active img,.active  {
     font-family: 'Arial', sans-serif;
     font-size: 18px;
     color: #555;
-    animation: parag 1s ease-out ;
+    animation: parag 1s ease-out backwards;
   }
+
+.active li{
+  --fade-time: 0s;
+  animation: list 1s ease-out var(--fade-time) backwards;
+}
   

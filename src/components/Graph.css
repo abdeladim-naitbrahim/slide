@@ -1,0 +1,70 @@
+.graph-wrapper {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* GRAPH */
+.graph-panel {
+  min-width: 400px;
+  min-height: 400px;
+}
+
+/* CONTROLS */
+.controls-panel {
+  background: #f7f7fb;
+  padding: 16px;
+  border-radius: 10px;
+  min-width: 160px;
+  min-height: 160px;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+/* SMALL INPUTS */
+input {
+  width: 60px;
+  padding: 4px;
+  font-size: 14px;
+}
+
+label {
+  width: 14px;
+}
+
+button {
+  padding: 4px 8px;
+  font-size: 13px;
+  border-radius: 6px;
+}
+
+.equation {
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* POINT LIST */
+.points-panel {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+  min-width: 140px;
+}
+
+.point-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.point-item button {
+  background: #ffefef;
+  border: none;
+  cursor: pointer;
+}
