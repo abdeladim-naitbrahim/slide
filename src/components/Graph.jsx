@@ -20,7 +20,7 @@ ChartJS.register(
   Tooltip
 );
 
-function Graph({minX=0,maxY=10,minY=0,maxX=10}) {
+function Graph({minX=0,maxY=10,minY=0,maxX=10,noGraph=false,ponitsClick=false}) {
   const [a, setA] = useState(1);
   const [b, setB] = useState(0);
   const [xInput, setXInput] = useState("");
@@ -120,6 +120,8 @@ const chartData = useMemo(() => ({
       pointRadius: 2,
       tension: 0.1,
       borderWidth:1,
+      hidden:noGraph
+      
     }
   ]
 }), [points, lineData]);
@@ -158,6 +160,8 @@ const chartData = useMemo(() => ({
     setXInput("");
   };
   const handleChartClick = (event) => {
+    if(!ponitsClick)
+      return
   const chart = chartRef.current;
   if (!chart) return;
 

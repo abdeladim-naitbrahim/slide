@@ -31,7 +31,7 @@ function App() {
     title: "Présentation graphique",
     reveal: "step",
     content: [
-      <Graph/>,
+      <Graph noGraph={true}/>,
       {
         type: "text",
         text: "Remarque : la représentation graphique d’une fonction affine est une droite."
@@ -92,7 +92,7 @@ function App() {
      "On remplace dans y = ax + b avec P1(1,3) : 3 = 2×1 + b → b = 1.",
      "L’équation de la droite est donc : y = 2x + 1."]
     }
-  ],[<Graph/>]]
+  ],[<Graph ponitsClick={true}/>]]
 }
 
 
