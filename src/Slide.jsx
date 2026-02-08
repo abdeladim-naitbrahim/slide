@@ -8,7 +8,7 @@ function ListComponent({ items }) {
   return (
     <ul>
       {items.map((item, index) => (
-        <li style={{ '--fade-time': index*0.5+0.5+'s' }} key={index}>{item}</li>
+        <li style={{ '--fade-time': index*0.5+'s' }} key={index}>{item}</li>
       ))}
     </ul>
   );
@@ -21,19 +21,22 @@ function ImageComponent({ src, alt }) {
 
 
 
-function Slide({ title, content, reveal,className }) {
+function Slide({ title, content, reveal,className,sub,cn }) {
     const contents = Array.isArray(content) ? content : [content];
+    const n=contents.length
+    let ns=contents.reduce((x,y)=>[...x,x[x.length-1]+Array.isArray(y) ? y.length : 1],[0]);
+    console.log(ns,cn)
   const [visibleCount, setVisibleCount] = useState(
     reveal != "step" ? contents.length : 1
   );
 
   // Reset animation when slide changes
   useEffect(() => {
-    setVisibleCount(reveal != "step" ? contents.length : 1);
+    setVisibleCount(reveal != "step" ? sub?cn:contents.length : 1);
   }, [contents, reveal]);
 
   const showNext = () => {
-    if (visibleCount < contents.length) {
+    if (visibleCount < sub?cn:contents.length) {
       setVisibleCount(v => v + 1);
       return true; // content revealed
     }
@@ -44,11 +47,13 @@ function Slide({ title, content, reveal,className }) {
 //Slide.showNexts.push(showNext);
 
   return (<>
-    <div className={`slide ${className}`}>
+    <div   className={`slide ${className}`}>
         
       <h2 >{title}</h2>
-      {contents.slice(0, visibleCount).map((content, index) => (
-        <div key={index} className="content-item">
+      <div style={{display:"flex",width:"100%"}}>
+        {(sub?contents:[contents]).map((contents,i)=><div style={{overflow:sub?"auto":"hidden", width:(sub?visibleCount>ns[i]?visibleCount<=ns[i+1]?100:Math.floor(100/n):0:100)+"%"}} className={i}>
+        {(Array.isArray(contents) ? contents : [contents]).slice(0, Math.max(visibleCount-ns[i],0)).map((content, index) => (
+        <div  key={ns[i]+index} className={"content-item "+(visibleCount-ns[i])}>
           
           {React.isValidElement(content) && content}
           {content.type === 'text' && <p>{content.text}</p>}
@@ -60,9 +65,11 @@ function Slide({ title, content, reveal,className }) {
           
         </div>
       ))}
+      </div>)}
+      </div>
       
     </div>
-    {visibleCount < contents.length&&<a className={className} style={{width:"100%",marginRight:"40px",textAlign:"right",cursor:"pointer"}} onClick={showNext}> {">"}</a>}
+    {visibleCount < (sub?cn:contents.length)&&<a className={className+" nxt"}  onClick={showNext}> {">"}</a>}
     </>
   );
 }

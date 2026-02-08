@@ -63,23 +63,39 @@ function App() {
   },
 
   {
-    title: "Déterminer a et b",
-    reveal: "step",
-    content: [
-      {
-        type: "text",
-        text: "Graphiquement : on lit b au point d’intersection avec l’axe des ordonnées."
-      },
-      {
-        type: "text",
-        text: "Graphiquement : a se calcule comme le rapport Δy / Δx entre deux points."
-      },
-      {
-        type: "text",
-        text: "Numériquement : à partir de deux points, on calcule a puis b."
-      }
-    ]
-  }
+  title: "Déterminer a et b",
+  reveal: "step",
+  sub:true,
+  cn:6,
+  content: [
+    [
+    {
+      type: "text",
+      text: "Graphiquement : b est l’ordonnée du point où la droite coupe l’axe des ordonnées."
+    },
+    {
+      type: "list",
+      items:[ "Pour trouver a, on choisit deux points de la droite : P1(x1, y1) et P2(x2, y2)."
+    ,
+     "La variation verticale est : y2 − y1."
+    , "La variation horizontale est : x2 − x1."
+      ,"Donc : a = (y2 − y1) / (x2 − x1)."]
+    },
+    {
+      type: "text",
+      text: "Exemple : P1(1, 3) et P2(3, 7)."
+    },
+    { type: "list",
+      items:[ "y2 − y1 = 7 − 3 = 4 et x2 − x1 = 3 − 1 = 2."
+    , "Donc a = 4 / 2 = 2.",
+
+     "On remplace dans y = ax + b avec P1(1,3) : 3 = 2×1 + b → b = 1.",
+     "L’équation de la droite est donc : y = 2x + 1."]
+    }
+  ],[<Graph/>]]
+}
+
+
 ];
 
 
@@ -103,6 +119,8 @@ function App() {
       title={slide.title}
       content={slide.content}
       reveal={slide.reveal}
+      sub={slide.sub}
+      cn={slide.cn}
       className={index === currentSlide ? 'active' : 'disabel'}
     />
   ))}

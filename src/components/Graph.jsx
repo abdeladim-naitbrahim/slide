@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import "./Graph.css";
 import {
   Chart as ChartJS,
@@ -25,6 +25,7 @@ function Graph({minX=0,maxY=10,minY=0,maxX=10}) {
   const [b, setB] = useState(0);
   const [xInput, setXInput] = useState("");
   const [points, setPoints] = useState([]);
+const chartRef = useRef(null);
 
 
 
@@ -156,6 +157,26 @@ const chartData = useMemo(() => ({
     setPoints(prev => [...(prev.map(e=>({x:e.x,y:e.y}))), { x, y,active:true }]);
     setXInput("");
   };
+  const handleChartClick = (event) => {
+  const chart = chartRef.current;
+  if (!chart) return;
+
+  const rect = chart.canvas.getBoundingClientRect();
+
+  const xPixel = event.clientX - rect.left;
+  const yPixel = event.clientY - rect.top;
+
+  const xScale = chart.scales.x;
+  const yScale = chart.scales.y;
+
+  const x = xScale.getValueForPixel(xPixel);
+  const y = yScale.getValueForPixel(yPixel);
+
+  setPoints(prev => [
+    ...prev.map(p => ({ x: p.x, y: p.y })),
+    { x, y, active: true }
+  ]);
+};
 
   const removePoint = index => {
     setPoints(prev => prev.map(e=>({x:e.x,y:e.y})).filter((_, i) => i !== index));
@@ -168,7 +189,7 @@ const clearPoints = () => {
   <div className="graph-wrapper">
     {/* GRAPH */}
     <div className="graph-panel">
-      <Line  data={chartData} options={options} />
+      <Line ref={chartRef}  data={chartData} options={options} onClick={handleChartClick} />
     </div>
 
     {/* CONTROLS */}
@@ -180,7 +201,7 @@ const clearPoints = () => {
         <input
           type="number"
           value={a}
-          onChange={e => {setA(Number(e.target.value));clearPoints()}}
+          onChange={e => {setA(Number(e.target.value));}}
         />
       </div>
 
@@ -189,7 +210,7 @@ const clearPoints = () => {
         <input
           type="number"
           value={b}
-          onChange={e => {setB(Number(e.target.value));clearPoints()}}
+          onChange={e => {setB(Number(e.target.value));}}
         />
       </div>
 
@@ -217,7 +238,7 @@ const clearPoints = () => {
 
       {points.map((p, i) => (
         <div className="point-item" key={i}>
-          ({p.x}, {p.y})
+          ({p.x.toFixed(2)}, {p.y.toFixed(2)})
           <button onClick={() => removePoint(i)}>✕</button>
         </div>
       ))}

@@ -5,11 +5,11 @@
     padding: 20px;
     border-radius: 10px;
     margin: 30px;
-   
+   overflow: hidden;
     opacity: 0;
     transform: translateY(50px);
     transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-    
+    animation: scrl 1s ;
   }
   
   /* Quand la slide est active, elle devient visible et se déplace */
@@ -76,6 +76,7 @@
     }
     
   }
+ 
   
   /* Ajouter des animations spécifiques pour les titres */
   .active h2 {
@@ -97,5 +98,16 @@
 .active li{
   --fade-time: 0s;
   animation: list 1s ease-out var(--fade-time) backwards;
+}
+.active.nxt{
+  color:rgb(251, 223, 223);
+  background-color: cornflowerblue;
+  padding: 10px;
+  font-size: larger;
+  font-weight: bold;
+  margin:40px;
+  text-align:right;
+  cursor: pointer;
+  border-radius: 6px;
 }
   
